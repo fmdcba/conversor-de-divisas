@@ -1,0 +1,28 @@
+{
+  "name": "conversor-de-divisas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -c-1",
+    "cypress-run": "cypress run",
+    "cypress-dev": "cypress open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fmdcba/conversor-de-divisas.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fmdcba/conversor-de-divisas/issues"
+  },
+  "homepage": "https://github.com/fmdcba/conversor-de-divisas#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  },
+  "devDependencies": {
+    "cypress": "^13.7.1"
+  }
+}
