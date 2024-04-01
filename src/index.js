@@ -13,8 +13,6 @@ function obtenerMonedas() {
 }
 
 function mostrarMonedas(monedas) {
-  console.log(monedas);
-
   for (const [simbolo, moneda] of monedas) {
     const $fila = document.createElement("tr");
     const $simbolo = document.createElement("th");
