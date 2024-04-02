@@ -14,6 +14,8 @@ function obtenerMonedas() {
 
 function mostrarMonedas(monedas) {
   for (const [simbolo, moneda] of monedas) {
+    mostrarSimbolosBase(simbolo);
+    mostrarSimbolosConversor(simbolo);
     const $fila = document.createElement("tr");
     const $simbolo = document.createElement("th");
     const $moneda = document.createElement("td");
@@ -26,4 +28,23 @@ function mostrarMonedas(monedas) {
   }
 }
 
+function mostrarSimbolosBase(simbolo) {
+  const $contenedorBases = document.querySelector("#simbolo-base");
+  const $opcionBase = document.createElement("option");
+  $opcionBase.textContent = simbolo;
+
+  $contenedorBases.appendChild($opcionBase);
+}
+
+function mostrarSimbolosConversor(simbolo) {
+  const $contenedorBaseDe = document.querySelector("#convertir-de");
+  const $contenedorBaseA = document.querySelector("#convertir-a");
+  const $opcionBaseDe = document.createElement("option");
+  $opcionBaseDe.textContent = simbolo;
+  const $opcionBaseA = document.createElement("option");
+  $opcionBaseA.textContent = simbolo;
+
+  $contenedorBaseDe.appendChild($opcionBaseDe);
+  $contenedorBaseA.appendChild($opcionBaseA);
+}
 obtenerMonedas();

@@ -14,10 +14,10 @@
     <nav class="row">
       <h1 class="col-md-6 text-center text-white p-2 bg-dark bg-gradient text-uppercase">Conversor de Divisas</h1>
       <section class="col-md-6 d-inline-flex p-2">
-        <form id="simbolo-base">
+        <form id="base">
           <label class="form-label"> Seleccionar Moneda Base:</label>
-          <select class="form-select">
-            <option selected>USD</option>
+          <select id="simbolo-base" class="form-select">
+            <!--Simbolos-->
           </select>
         </form>
       </section>
@@ -25,7 +25,7 @@
   </header>
 
   <section class="container">
-    <span>Obtener valores historicos desde el <em>4 Enero de 1999</em></span>
+    <span>Buscá valores historicos desde el <em>4 Enero de 1999</em></span>
     <form id="fecha" class="row g-3">
       <div class="col-md-3">
         <label for="dia" class="form-label">Día</label>
@@ -47,21 +47,21 @@
 
   <section class="container">
     <span>Convertí la cantidad que quieras de una moneda a otra</span>
-    <form id="fecha" class="row g-3">
+    <form id="coversor" class="row g-3">
       <div class="col-md-3">
         <label for="dia" class="form-label">Cantidad</label>
         <input type="number" class="form-control" id="cantidad">
       </div>
       <div class="col-md-3">
         <label class="form-label"> De:</label>
-        <select class="form-select">
-          <option selected>USD</option>
+        <select id="convertir-de" class="form-select">
+          <!--Simbolos-->
         </select>
       </div>
       <div class="col-md-3">
         <label class="form-label"> A:</label>
-        <select class="form-select">
-          <option selected>USD</option>
+        <select id="convertir-a" class="form-select">
+          <!--Simbolos-->
         </select>
       </div>
       <div class="col-md-3 d-inline-flex p-2">
