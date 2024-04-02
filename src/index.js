@@ -73,7 +73,7 @@ function manejarBase() {
   const simbolo = $simbolo.value;
   const $valor = document.querySelector(`#valor-${simbolo}`);
   const $filaValor = document.querySelector(`#${simbolo}`);
-  $filaValor.className = "table-dark";
+  $filaValor.className = "table-light";
   $valor.textContent = 1;
 
   actualizarValores(simbolo);
@@ -96,8 +96,8 @@ function mostrarValores(valores) {
     const $valor = document.querySelector(`#valor-${simbolo}`);
     $valor.textContent = valor;
 
-    if ($filaValor.classList.contains("table-dark")) {
-      $filaValor.classList.remove("table-dark");
+    if ($filaValor.classList.contains("table-light")) {
+      $filaValor.classList.remove("table-light");
     }
   }
 }
