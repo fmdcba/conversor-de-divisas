@@ -57,8 +57,8 @@ function mostrarSimbolosConversor(simbolo) {
 }
 
 document.querySelector("#listar").onclick = function (e) {
-  const $mensajeFecha = document.querySelector('#mensaje-fecha')
-  $mensajeFecha.textContent = '';
+  const $mensajeFecha = document.querySelector("#mensaje-fecha");
+  $mensajeFecha.textContent = "";
 
   manejarBase();
   e.preventDefault();
@@ -91,7 +91,7 @@ function mostrarValores(valores) {
     const $filaValor = document.querySelector(`#${simbolo}`);
     const $valor = document.querySelector(`#valor-${simbolo}`);
 
-    if($valor !== null) {
+    if ($valor !== null) {
       $valor.textContent = `$${valor}`;
     }
 
@@ -113,17 +113,17 @@ function filtrarPorFecha() {
   const $mes = document.querySelector("#mes");
   const $dia = document.querySelector("#dia");
   const $simbolo = document.querySelector("#simbolo-base");
-  const anio = Number($anio.value)
-  let mes = Number($mes.value)
-  let dia = Number($dia.value)
+  const anio = Number($anio.value);
+  let mes = Number($mes.value);
+  let dia = Number($dia.value);
   const simbolo = $simbolo.value;
 
-  if(mes < 10) {
-    mes = ('0' + mes).slice(-2);
+  if (mes < 10) {
+    mes = ("0" + mes).slice(-2);
   }
 
-  if(dia < 10) {
-    dia = ('0' + dia).slice(-2);
+  if (dia < 10) {
+    dia = ("0" + dia).slice(-2);
   }
 
   obtenerValoresPorFecha(anio, mes, dia, simbolo);
@@ -131,13 +131,13 @@ function filtrarPorFecha() {
 
 function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
   fetch(`${API}/${anio}-${mes}-${dia}?from=${simbolo}`)
-    .then(respuesta => respuesta.json())
-    .then(respuestaJSON => {
-      const $mensaje = document.querySelector('#mensaje-fecha');
+    .then((respuesta) => respuesta.json())
+    .then((respuestaJSON) => {
+      const $mensaje = document.querySelector("#mensaje-fecha");
       const $monedaBase = document.querySelector(`#${simbolo}`);
-      resultado = respuestaJSON
+      resultado = respuestaJSON;
 
-      if(resultado.message) {
+      if (resultado.message) {
         $mensaje.textContent = "No encontrado";
         $mensaje.className = "badge text-bg-danger";
         reiniciarValores();
@@ -150,16 +150,14 @@ function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
         reiniciarValores();
         mostrarValores(valores);
       }
-
-
     })
-    .catch((error) => console.log("Falló", error))
+    .catch((error) => console.log("Falló", error));
 }
 
 function reiniciarValores() {
-  document.querySelectorAll(".valor").forEach(valor => {
-    valor.textContent = '#';
-  })
+  document.querySelectorAll(".valor").forEach((valor) => {
+    valor.textContent = "#";
+  });
 }
 
 document.querySelector("#convertir").onclick = function (e) {
@@ -168,26 +166,29 @@ document.querySelector("#convertir").onclick = function (e) {
 };
 
 function obtenerValoresParaConversion() {
-  const cantidad = document.querySelector('#cantidad').value;
-  const convertirDe = document.querySelector('#convertir-de').value;
-  const convertirA = document.querySelector('#convertir-a').value;
+  const cantidad = document.querySelector("#cantidad").value;
+  const convertirDe = document.querySelector("#convertir-de").value;
+  const convertirA = document.querySelector("#convertir-a").value;
 
   convertirMoneda(cantidad, convertirDe, convertirA);
 }
 
 function convertirMoneda(cantidad, monedaDe, monedaA) {
   fetch(`${API}/latest?amount=${cantidad}&from=${monedaDe}&to=${monedaA}`)
-    .then(respuesta => respuesta.json())
-    .then(respuestaJSON => {
+    .then((respuesta) => respuesta.json())
+    .then((respuestaJSON) => {
       mostrarResultadoConversion(respuestaJSON);
-    })
-
+    });
 }
 
 function mostrarResultadoConversion(resultado) {
-  const $mensajeResultado = document.querySelector('#resultado-conversion');
-  $mensajeResultado.textContent = `$${resultado.amount}-"${resultado.base}" equivale a $${Object.values(resultado.rates)}-"${Object.keys(resultado.rates)}" a fecha ${resultado.date}`
-  $mensajeResultado.className = 'badge text-bg-success'
+  const $mensajeResultado = document.querySelector("#resultado-conversion");
+  $mensajeResultado.textContent = `$${resultado.amount}-"${
+    resultado.base
+  }" equivale a $${Object.values(resultado.rates)}-"${Object.keys(
+    resultado.rates,
+  )}" a fecha ${resultado.date}`;
+  $mensajeResultado.className = "badge text-bg-success";
 }
 
 obtenerMonedas();
