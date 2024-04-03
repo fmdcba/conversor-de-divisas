@@ -56,14 +56,6 @@ function mostrarSimbolosConversor(simbolo) {
   $contenedorBaseA.appendChild($opcionBaseA);
 }
 
-function manejarSeleccionBase() {
-  document.querySelectorAll("#simbolo-base option").forEach((simbolo) => {
-    simbolo.onclick = function (e) {
-      console.log(e.target);
-    };
-  });
-}
-
 document.querySelector("#listar").onclick = function (e) {
   const $mensajeFecha = document.querySelector('#mensaje-fecha')
   $mensajeFecha.textContent = '';
@@ -88,8 +80,6 @@ function actualizarValores(base) {
     .then((respuesta) => respuesta.json())
     .then((respuestaJSON) => {
       const valores = Object.entries(respuestaJSON.rates);
-
-      console.log(valores)
 
       mostrarValores(valores);
     })
@@ -137,7 +127,6 @@ function filtrarPorFecha() {
   }
 
   obtenerValoresPorFecha(anio, mes, dia, simbolo);
-
 }
 
 function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
@@ -147,8 +136,6 @@ function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
       const $mensaje = document.querySelector('#mensaje-fecha');
       const $monedaBase = document.querySelector(`#${simbolo}`);
       resultado = respuestaJSON
-
-      // resaltarMonedaBase($monedaBase)
 
       if(resultado.message) {
         $mensaje.textContent = "No encontrado";
@@ -192,8 +179,6 @@ function convertirMoneda(cantidad, monedaDe, monedaA) {
   fetch(`${API}/latest?amount=${cantidad}&from=${monedaDe}&to=${monedaA}`)
     .then(respuesta => respuesta.json())
     .then(respuestaJSON => {
-      console.log(respuestaJSON);
-
       mostrarResultadoConversion(respuestaJSON);
     })
 
@@ -201,7 +186,6 @@ function convertirMoneda(cantidad, monedaDe, monedaA) {
 
 function mostrarResultadoConversion(resultado) {
   const $mensajeResultado = document.querySelector('#resultado-conversion');
-  debugger;
   $mensajeResultado.textContent = `$${resultado.amount}-"${resultado.base}" equivale a $${Object.values(resultado.rates)}-"${Object.keys(resultado.rates)}" a fecha ${resultado.date}`
   $mensajeResultado.className = 'badge text-bg-success'
 }
