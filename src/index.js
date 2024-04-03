@@ -134,7 +134,6 @@ function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
     .then((respuesta) => respuesta.json())
     .then((respuestaJSON) => {
       const $mensaje = document.querySelector("#mensaje-fecha");
-      const $monedaBase = document.querySelector(`#${simbolo}`);
       resultado = respuestaJSON;
 
       if (resultado.message) {
