@@ -22,6 +22,7 @@ function mostrarMonedas(monedas) {
     const $valor = document.createElement("td");
     $fila.id = simbolo;
     $valor.id = `valor-${simbolo}`;
+    $valor.className = "valor";
     $simbolo.textContent = simbolo;
     $moneda.textContent = moneda;
     $valor.textContent = "#";
@@ -85,6 +86,8 @@ function actualizarValores(base) {
     .then((respuestaJSON) => {
       const valores = Object.entries(respuestaJSON.rates);
 
+      console.log(valores)
+
       mostrarValores(valores);
     })
     .catch((error) => console.log("Falló", error));
@@ -94,12 +97,77 @@ function mostrarValores(valores) {
   for (const [simbolo, valor] of valores) {
     const $filaValor = document.querySelector(`#${simbolo}`);
     const $valor = document.querySelector(`#valor-${simbolo}`);
-    $valor.textContent = valor;
 
-    if ($filaValor.classList.contains("table-light")) {
-      $filaValor.classList.remove("table-light");
+    if($valor !== null) {
+      $valor.textContent = `$${valor}`;
+    }
+
+    if ($filaValor !== null) {
+      if ($filaValor.classList.contains("table-light")) {
+        $filaValor.classList.remove("table-light");
+      }
     }
   }
+}
+
+document.querySelector("#filtrar-fecha").onclick = function (e) {
+  filtrarPorFecha();
+  e.preventDefault();
+};
+
+function filtrarPorFecha() {
+  const $anio = document.querySelector("#anio");
+  const $mes = document.querySelector("#mes");
+  const $dia = document.querySelector("#dia");
+  const $simbolo = document.querySelector("#simbolo-base");
+  const anio = Number($anio.value)
+  let mes = Number($mes.value)
+  let dia = Number($dia.value)
+  const simbolo = $simbolo.value;
+
+  if(mes < 10) {
+    mes = ('0' + mes).slice(-2);
+  }
+
+  if(dia < 10) {
+    dia = ('0' + dia).slice(-2);
+  }
+
+  obtenerValoresPorFecha(anio, mes, dia, simbolo);
+
+}
+
+function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
+  fetch(`${API}/${anio}-${mes}-${dia}?from=${simbolo}`)
+    .then(respuesta => respuesta.json())
+    .then(respuestaJSON => {
+      console.log(respuestaJSON);
+      const $mensaje = document.querySelector('#mensaje-fecha')
+      resultado = respuestaJSON
+
+      if(resultado.message) {
+        $mensaje.textContent = "No encontrado";
+        $mensaje.className = "badge text-bg-danger";
+        reiniciarValores();
+      } else {
+        valores = Object.entries(resultado.rates);
+
+        $mensaje.textContent = `Valores filtrados en fecha ${resultado.date} en base a $${resultado.amount}-${simbolo}`;
+        $mensaje.className = "badge text-bg-success";
+
+        reiniciarValores();
+        mostrarValores(valores);
+      }
+
+
+    })
+    .catch((error) => console.log("Falló", error))
+}
+
+function reiniciarValores() {
+  document.querySelectorAll(".valor").forEach(valor => {
+    valor.textContent = '#';
+  })
 }
 
 obtenerMonedas();
