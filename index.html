@@ -12,14 +12,18 @@
 <body>
   <header class="container">
     <nav class="row">
-      <h1 class="col-md-6 text-center text-white p-2 m-1 bg-success bg-gradient text-uppercase">
+      <h1 class="col-md-4 text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase">
         Conversor de Divisas <strong>$</strong></h1>
       <section class="col-md-4 d-inline-flex p-2">
         <form id="base" class="text-center">
-          <label class="form-label"> Seleccionar Moneda Base:</label>
-          <select id="simbolo-base" class="form-select">
-            <!--Simbolos-->
-          </select>
+          <div class="col-md-3 d-inline-flex p-2">
+            <label class="form-label"> Seleccionar Moneda Base:</label>
+          </div>
+          <div class="col-md-4 d-inline-flex p-2">
+            <select id="simbolo-base" class="form-select">
+              <!--Simbolos-->
+            </select>
+          </div>
           <div class="col-md-3 d-inline-flex p-2">
             <button type="submit" id="listar" class="btn btn-success btn-sm">Listar Valores</button>
           </div>
