@@ -65,6 +65,9 @@ function manejarSeleccionBase() {
 }
 
 document.querySelector("#listar").onclick = function (e) {
+  const $mensajeFecha = document.querySelector('#mensaje-fecha')
+  $mensajeFecha.textContent = '';
+
   manejarBase();
   e.preventDefault();
 };
@@ -141,8 +144,7 @@ function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
   fetch(`${API}/${anio}-${mes}-${dia}?from=${simbolo}`)
     .then(respuesta => respuesta.json())
     .then(respuestaJSON => {
-      console.log(respuestaJSON);
-      const $mensaje = document.querySelector('#mensaje-fecha')
+      const $mensaje = document.querySelector('#mensaje-fecha');
       resultado = respuestaJSON
 
       if(resultado.message) {
