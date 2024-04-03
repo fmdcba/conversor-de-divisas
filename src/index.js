@@ -78,7 +78,7 @@ function manejarBase() {
   const $valor = document.querySelector(`#valor-${simbolo}`);
   const $filaValor = document.querySelector(`#${simbolo}`);
   $filaValor.className = "table-light";
-  $valor.textContent = 1;
+  $valor.textContent = "$1";
 
   actualizarValores(simbolo);
 }
@@ -145,7 +145,10 @@ function obtenerValoresPorFecha(anio, mes, dia, simbolo) {
     .then(respuesta => respuesta.json())
     .then(respuestaJSON => {
       const $mensaje = document.querySelector('#mensaje-fecha');
+      const $monedaBase = document.querySelector(`#${simbolo}`);
       resultado = respuestaJSON
+
+      // resaltarMonedaBase($monedaBase)
 
       if(resultado.message) {
         $mensaje.textContent = "No encontrado";
@@ -170,6 +173,37 @@ function reiniciarValores() {
   document.querySelectorAll(".valor").forEach(valor => {
     valor.textContent = '#';
   })
+}
+
+document.querySelector("#convertir").onclick = function (e) {
+  obtenerValoresParaConversion();
+  e.preventDefault();
+};
+
+function obtenerValoresParaConversion() {
+  const cantidad = document.querySelector('#cantidad').value;
+  const convertirDe = document.querySelector('#convertir-de').value;
+  const convertirA = document.querySelector('#convertir-a').value;
+
+  convertirMoneda(cantidad, convertirDe, convertirA);
+}
+
+function convertirMoneda(cantidad, monedaDe, monedaA) {
+  fetch(`${API}/latest?amount=${cantidad}&from=${monedaDe}&to=${monedaA}`)
+    .then(respuesta => respuesta.json())
+    .then(respuestaJSON => {
+      console.log(respuestaJSON);
+
+      mostrarResultadoConversion(respuestaJSON);
+    })
+
+}
+
+function mostrarResultadoConversion(resultado) {
+  const $mensajeResultado = document.querySelector('#resultado-conversion');
+  debugger;
+  $mensajeResultado.textContent = `$${resultado.amount}-"${resultado.base}" equivale a $${Object.values(resultado.rates)}-"${Object.keys(resultado.rates)}" a fecha ${resultado.date}`
+  $mensajeResultado.className = 'badge text-bg-success'
 }
 
 obtenerMonedas();
