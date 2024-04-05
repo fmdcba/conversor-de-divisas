@@ -1,4 +1,30 @@
-const API = 'https://api.frankfurter.app';
+import {
+  mostrarCartelCargando,
+  mostrarListadoMonedas,
+  obtenerFechaSeleccionada,
+  obtenerMonedaSeleccionada,
+} from './ui.js';
+
+import { obtenerMonedas } from './exchange.js';
+
+/* async function actualizar() {
+  mostrarCartelCargando();
+  const monedas = await obtenerCambios(
+    obtenerFechaSeleccionada(),
+    obtenerMonedaSeleccionada(),
+  );
+  mostrarMonedas(monedas);
+} */
+
+async function inicializar() {
+  mostrarCartelCargando();
+  const monedas = await obtenerMonedas();
+  mostrarListadoMonedas(monedas);
+}
+
+inicializar();
+
+/* const API = 'https://api.frankfurter.app';
 const $tabla = document.querySelector('.table #listado');
 
 function obtenerMonedas() {
@@ -190,3 +216,4 @@ function mostrarResultadoConversion(resultado) {
 }
 
 obtenerMonedas();
+ */

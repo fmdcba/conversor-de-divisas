@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conversor de Divisas</title>
+    <title>Conversor de Monedas</title>
     <link
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -17,21 +17,21 @@
         <h1
           class="col-md-4 text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase"
         >
-          Conversor de Divisas <strong>$</strong>
+          Conversor de Monedas <strong>$</strong>
         </h1>
         <section class="col-md-4 d-inline-flex p-2">
           <form id="base" class="text-center">
             <div class="col-md-3 d-inline-flex p-2">
-              <label class="form-label"> Seleccionar Moneda Base:</label>
+              <label class="form-label"> Seleccionar moneda base:</label>
             </div>
             <div class="col-md-4 d-inline-flex p-2">
-              <select id="simbolo-base" class="form-select">
+              <select id="monedas-base" class="form-select">
                 <!--Simbolos-->
               </select>
             </div>
             <div class="col-md-3 d-inline-flex p-2">
               <button type="submit" id="listar" class="btn btn-success btn-sm">
-                Listar Valores
+                Listar Monedas
               </button>
             </div>
           </form>
@@ -39,32 +39,12 @@
       </nav>
     </header>
 
-    <section class="container">
+    <section class="container form-group">
       <p>Buscá valores historicos desde el <em>4 Enero de 1999</em>...</p>
-      <form id="fecha" class="row g-3">
-        <div class="col-md-3">
-          <label for="dia" class="form-label">Día</label>
-          <input type="number" class="form-control" id="dia" />
-        </div>
-        <div class="col-md-3">
-          <label for="mes" class="form-label">Mes</label>
-          <input type="number" class="form-control" id="mes" />
-        </div>
-        <div class="col-md-3">
-          <label for="anio" class="form-label">Año</label>
-          <input type="number" class="form-control" id="anio" />
-        </div>
-        <div class="col-md-3 d-inline-flex p-2">
-          <button
-            type="submit"
-            id="filtrar-fecha"
-            class="btn btn-success btn-sm"
-          >
-            Buscar
-          </button>
-        </div>
-      </form>
-      <span id="mensaje-fecha"></span>
+      <label for="example-date-input" class="col-2 col-form-label">Fecha</label>
+      <div class="col-10">
+        <input class="form-control" type="date" id="fecha" />
+      </div>
     </section>
 
     <section class="container">
@@ -99,7 +79,7 @@
     </section>
 
     <main class="container mt-5">
-      <h2><strong>Lista de Divisas</strong></h2>
+      <h2><strong>Lista de Monedas</strong></h2>
       <table class="table table-success table-responsive table-striped">
         <thead>
           <tr>
