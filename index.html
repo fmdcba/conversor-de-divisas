@@ -1,105 +1,119 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conversor de Divisas</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Conversor de Divisas</title>
-  <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/main.css">
-</head>
+  <body>
+    <header class="container">
+      <nav class="row">
+        <h1
+          class="col-md-4 text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase"
+        >
+          Conversor de Divisas <strong>$</strong>
+        </h1>
+        <section class="col-md-4 d-inline-flex p-2">
+          <form id="base" class="text-center">
+            <div class="col-md-3 d-inline-flex p-2">
+              <label class="form-label"> Seleccionar Moneda Base:</label>
+            </div>
+            <div class="col-md-4 d-inline-flex p-2">
+              <select id="simbolo-base" class="form-select">
+                <!--Simbolos-->
+              </select>
+            </div>
+            <div class="col-md-3 d-inline-flex p-2">
+              <button type="submit" id="listar" class="btn btn-success btn-sm">
+                Listar Valores
+              </button>
+            </div>
+          </form>
+        </section>
+      </nav>
+    </header>
 
-<body>
-  <header class="container">
-    <nav class="row">
-      <h1 class="col-md-4 text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase">
-        Conversor de Divisas <strong>$</strong></h1>
-      <section class="col-md-4 d-inline-flex p-2">
-        <form id="base" class="text-center">
-          <div class="col-md-3 d-inline-flex p-2">
-            <label class="form-label"> Seleccionar Moneda Base:</label>
-          </div>
-          <div class="col-md-4 d-inline-flex p-2">
-            <select id="simbolo-base" class="form-select">
-              <!--Simbolos-->
-            </select>
-          </div>
-          <div class="col-md-3 d-inline-flex p-2">
-            <button type="submit" id="listar" class="btn btn-success btn-sm">Listar Valores</button>
-          </div>
-        </form>
-      </section>
-    </nav>
-  </header>
+    <section class="container">
+      <p>Buscá valores historicos desde el <em>4 Enero de 1999</em>...</p>
+      <form id="fecha" class="row g-3">
+        <div class="col-md-3">
+          <label for="dia" class="form-label">Día</label>
+          <input type="number" class="form-control" id="dia" />
+        </div>
+        <div class="col-md-3">
+          <label for="mes" class="form-label">Mes</label>
+          <input type="number" class="form-control" id="mes" />
+        </div>
+        <div class="col-md-3">
+          <label for="anio" class="form-label">Año</label>
+          <input type="number" class="form-control" id="anio" />
+        </div>
+        <div class="col-md-3 d-inline-flex p-2">
+          <button
+            type="submit"
+            id="filtrar-fecha"
+            class="btn btn-success btn-sm"
+          >
+            Buscar
+          </button>
+        </div>
+      </form>
+      <span id="mensaje-fecha"></span>
+    </section>
 
-  <section class="container">
-    <p>Buscá valores historicos desde el <em>4 Enero de 1999</em>...</p>
-    <form id="fecha" class="row g-3">
-      <div class="col-md-3">
-        <label for="dia" class="form-label">Día</label>
-        <input type="number" class="form-control" id="dia">
-      </div>
-      <div class="col-md-3">
-        <label for="mes" class="form-label">Mes</label>
-        <input type="number" class="form-control" id="mes">
-      </div>
-      <div class="col-md-3">
-        <label for="anio" class="form-label">Año</label>
-        <input type="number" class="form-control" id="anio">
-      </div>
-      <div class="col-md-3 d-inline-flex p-2">
-        <button type="submit" id="filtrar-fecha" class="btn btn-success btn-sm">Buscar</button>
-      </div>
-    </form>
-    <span id="mensaje-fecha"></span>
-  </section>
+    <section class="container">
+      <p>Convertí la cantidad que quieras de una moneda a otra...</p>
+      <form id="coversor" class="row g-3">
+        <div class="col-md-3">
+          <label for="dia" class="form-label">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label"> De:</label>
+          <select id="convertir-de" class="form-select">
+            <option value="" selected>Selecciona...</option>
 
-  <section class="container">
-    <p>Convertí la cantidad que quieras de una moneda a otra...</p>
-    <form id="coversor" class="row g-3">
-      <div class="col-md-3">
-        <label for="dia" class="form-label">Cantidad</label>
-        <input type="number" class="form-control" id="cantidad">
-      </div>
-      <div class="col-md-3">
-        <label class="form-label"> De:</label>
-        <select id="convertir-de" class="form-select">
-          <option value="" selected>Selecciona...</option>
+            <!--Simbolos-->
+          </select>
+        </div>
+        <div class="col-md-3">
+          <label class="form-label"> A:</label>
+          <select id="convertir-a" class="form-select">
+            <option value="" selected>Selecciona...</option>
+            <!--Simbolos-->
+          </select>
+        </div>
+        <div class="col-md-3 d-inline-flex p-2">
+          <button type="submit" class="btn btn-success btn-sm" id="convertir">
+            Convertir
+          </button>
+        </div>
+      </form>
+      <span id="resultado-conversion"></span>
+    </section>
 
-          <!--Simbolos-->
-        </select>
-      </div>
-      <div class="col-md-3">
-        <label class="form-label"> A:</label>
-        <select id="convertir-a" class="form-select">
-          <option value="" selected>Selecciona...</option>
-          <!--Simbolos-->
-        </select>
-      </div>
-      <div class="col-md-3 d-inline-flex p-2">
-        <button type="submit" class="btn btn-success btn-sm" id="convertir">Convertir</button>
-      </div>
-    </form>
-    <span id="resultado-conversion"></span>
-  </section>
+    <main class="container mt-5">
+      <h2><strong>Lista de Divisas</strong></h2>
+      <table class="table table-success table-responsive table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Simbolo</th>
+            <th scope="col">Moneda</th>
+            <th scope="col">Valor</th>
+          </tr>
+        </thead>
+        <tbody id="listado">
+          <!--Monedas-->
+        </tbody>
+      </table>
+    </main>
 
-  <main class="container mt-5">
-    <h2><strong>Lista de Divisas</strong></h2>
-    <table class="table table-success table-responsive table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Simbolo</th>
-          <th scope="col">Moneda</th>
-          <th scope="col">Valor</th>
-        </tr>
-      </thead>
-      <tbody id="listado">
-        <!--Monedas-->
-      </tbody>
-    </table>
-  </main>
-
-  <script type="text/javascript" src="src/index.js"></script>
-</body>
-
+    <script type="text/javascript" src="src/index.js"></script>
+  </body>
 </html>
