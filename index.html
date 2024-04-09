@@ -20,21 +20,21 @@
           Conversor de Monedas <strong>$</strong>
         </h1>
         <section class="col-md-4 d-inline-flex p-2">
-          <form id="base" class="text-center">
+          <div id="base" class="text-center">
             <div class="col-md-3 d-inline-flex p-2">
               <label class="form-label"> Seleccionar moneda base:</label>
             </div>
             <div class="col-md-4 d-inline-flex p-2">
-              <select id="monedas-base" class="form-select">
+              <select id="moneda-base" class="form-select">
                 <!--Simbolos-->
               </select>
             </div>
             <div class="col-md-3 d-inline-flex p-2">
               <button type="submit" id="listar" class="btn btn-success btn-sm">
-                Listar Monedas
+                Listar Cambios
               </button>
             </div>
-          </form>
+          </div>
         </section>
       </nav>
     </header>
@@ -85,7 +85,7 @@
           <tr>
             <th scope="col">Simbolo</th>
             <th scope="col">Moneda</th>
-            <th scope="col">Valor</th>
+            <th scope="col">Cambio</th>
           </tr>
         </thead>
         <tbody id="listado">

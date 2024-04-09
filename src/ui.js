@@ -1,13 +1,15 @@
-export function mostrarListadoMonedas(monedas) {
+export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
   agregarMonedasBase(monedas);
   const $listado = document.querySelector('#listado');
-  $listado.innerHTML = '';
+  const $cartelCarga = document.querySelector('#cartel-carga');
+  $cartelCarga.remove();
 
   for (const [simbolo, moneda] of monedas) {
     const $filaMoneda = document.createElement('tr');
     const $simbolo = document.createElement('th');
     const $moneda = document.createElement('td');
     const $cambio = document.createElement('td');
+    $filaMoneda.id = simbolo;
     $simbolo.textContent = simbolo;
     $moneda.textContent = moneda;
     $cambio.textContent = '#';
@@ -17,10 +19,19 @@ export function mostrarListadoMonedas(monedas) {
     $filaMoneda.appendChild($moneda);
     $filaMoneda.appendChild($cambio);
   }
+
+  document.querySelector('#listar').onclick = callbackSeleccionMoneda;
 }
 
-async function agregarMonedasBase(monedas) {
-  const $monedasBase = document.querySelector('#monedas-base');
+export function mostrarListadoCambios(cambios) {
+  for (const [simbolo, cambio] of cambios) {
+    const $moneda = document.querySelector(`#${simbolo} td:last-child`);
+    $moneda.textContent = cambio;
+  }
+}
+
+function agregarMonedasBase(monedas) {
+  const $monedasBase = document.querySelector('#moneda-base');
 
   for (const [simbolo] of monedas) {
     const $base = document.createElement('option');
@@ -37,7 +48,13 @@ export function mostrarMonedas(monedas) {
 }
 
 export function obtenerMonedaSeleccionada() {
-  return undefined;
+  const $base = document.querySelector('#moneda-base').value;
+
+  if ($base) {
+    return $base;
+  } else {
+    return undefined;
+  }
 }
 
 export function obtenerFechaSeleccionada() {
@@ -49,6 +66,7 @@ export function mostrarCartelCargando() {
   $listado.innerHTML = '';
 
   const $contendedor = document.createElement('div');
+  $contendedor.id = 'cartel-carga';
   const $mensajeCarga = document.createElement('strong');
   const $animacionCarga = document.createElement('div');
   $contendedor.classList.add('d-flex', 'align-items-center');

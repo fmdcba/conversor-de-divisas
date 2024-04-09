@@ -17,7 +17,7 @@ export async function obtenerListadoCambios(fecha = 'latest', base = 'AUD') {
   return resultadoJSON.rates;
 }
 
-export async function obtenerCambios() {
-  const cambios = await obtenerListadoCambios();
+export async function obtenerCambios(fecha, base) {
+  const cambios = await obtenerListadoCambios(fecha, base);
   return Object.entries(cambios);
 }
