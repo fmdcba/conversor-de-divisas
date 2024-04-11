@@ -4,6 +4,7 @@ export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
   const $cartelCarga = document.querySelector('#cartel-carga');
   $cartelCarga.remove();
 
+  console.log(monedas);
   for (const [simbolo, moneda] of monedas) {
     const $filaMoneda = document.createElement('tr');
     const $simbolo = document.createElement('th');
@@ -13,6 +14,7 @@ export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
     $simbolo.textContent = simbolo;
     $moneda.textContent = moneda;
     $cambio.textContent = '#';
+    $cambio.className = 'cambios';
 
     $listado.appendChild($filaMoneda);
     $filaMoneda.appendChild($simbolo);
@@ -20,18 +22,31 @@ export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
     $filaMoneda.appendChild($cambio);
   }
 
-  document.querySelector('#listar').onclick = callbackSeleccionMoneda;
+  document.querySelector('#mostrar').onclick = callbackSeleccionMoneda;
 }
 
 export function mostrarListadoCambios(cambios) {
+  borrarCambiosAnteriores();
+  const base = document.querySelector('#base').value;
+  const $monedaActual = document.querySelector(`#${base} td:last-child`);
+  $monedaActual.textContent = '$ 1';
+
   for (const [simbolo, cambio] of cambios) {
     const $moneda = document.querySelector(`#${simbolo} td:last-child`);
-    $moneda.textContent = cambio;
+    if ($moneda !== null) {
+      $moneda.textContent = `$ ${cambio}`;
+    }
   }
 }
 
+function borrarCambiosAnteriores() {
+  document.querySelectorAll('.cambios').forEach(($cambio) => {
+    $cambio.textContent = '#';
+  });
+}
+
 function agregarMonedasBase(monedas) {
-  const $monedasBase = document.querySelector('#moneda-base');
+  const $monedasBase = document.querySelector('#base');
 
   for (const [simbolo] of monedas) {
     const $base = document.createElement('option');
@@ -42,13 +57,8 @@ function agregarMonedasBase(monedas) {
   }
 }
 
-export function mostrarMonedas(monedas) {
-  for (const [simbolo, moneda] of monedas) {
-  }
-}
-
 export function obtenerMonedaSeleccionada() {
-  const $base = document.querySelector('#moneda-base').value;
+  const $base = document.querySelector('#base').value;
 
   if ($base) {
     return $base;
@@ -58,7 +68,13 @@ export function obtenerMonedaSeleccionada() {
 }
 
 export function obtenerFechaSeleccionada() {
-  return undefined;
+  const $fecha = document.querySelector('#fecha').value;
+
+  if ($fecha) {
+    return $fecha;
+  } else {
+    return undefined;
+  }
 }
 
 export function mostrarCartelCargando() {
