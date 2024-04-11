@@ -79,3 +79,11 @@ export function mostrarCartelCargando() {
   $contendedor.appendChild($animacionCarga);
   $listado.appendChild($contendedor);
 }
+
+export function configurarFechas() {
+  const $fecha = document.querySelector('#fecha');
+  const FECHA_MINIMA_PERMITIDA = '1999-01-04';
+
+  $fecha.max = new Date().toISOString().split('T')[0];
+  $fecha.min = FECHA_MINIMA_PERMITIDA;
+}

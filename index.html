@@ -31,7 +31,7 @@
             </div>
             <div class="col-md-3 d-inline-flex p-2">
               <button type="submit" id="listar" class="btn btn-success btn-sm">
-                Listar Cambios
+                Mostrar Cambios
               </button>
             </div>
           </div>
@@ -47,7 +47,23 @@
       </div>
     </section>
 
-    <section class="container">
+    <main class="container mt-5">
+      <h2><strong>Lista de Monedas</strong></h2>
+      <table class="table table-success table-responsive table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Simbolo</th>
+            <th scope="col">Moneda</th>
+            <th scope="col">Cambio</th>
+          </tr>
+        </thead>
+        <tbody id="listado">
+          <!--Monedas-->
+        </tbody>
+      </table>
+    </main>
+
+    <footer class="container">
       <p>Convertí la cantidad que quieras de una moneda a otra...</p>
       <form id="coversor" class="row g-3">
         <div class="col-md-3">
@@ -76,23 +92,7 @@
         </div>
       </form>
       <span id="resultado-conversion"></span>
-    </section>
-
-    <main class="container mt-5">
-      <h2><strong>Lista de Monedas</strong></h2>
-      <table class="table table-success table-responsive table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Simbolo</th>
-            <th scope="col">Moneda</th>
-            <th scope="col">Cambio</th>
-          </tr>
-        </thead>
-        <tbody id="listado">
-          <!--Monedas-->
-        </tbody>
-      </table>
-    </main>
+    </footer>
 
     <script src="src/index.js" type="module"></script>
   </body>
