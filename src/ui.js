@@ -1,4 +1,8 @@
-export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
+export function mostrarListadoMonedas(
+  monedas,
+  callbackSeleccionMoneda,
+  callbackConvertir,
+) {
   agregarMonedasBase(monedas);
   const $listado = document.querySelector('#listado');
   const $cartelCarga = document.querySelector('#cartel-carga');
@@ -23,6 +27,7 @@ export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
   }
 
   document.querySelector('#mostrar').onclick = callbackSeleccionMoneda;
+  document.querySelector('#convertir').onclick = callbackConvertir;
 }
 
 export function mostrarListadoCambios(cambios) {
@@ -50,10 +55,14 @@ export function mostrarListadoCambios(cambios) {
   }
 }
 
+export function mostrarConversion(conversion) {
+  document.querySelector('#conversion').textContent =
+    `El resultado es $${Object.entries(conversion)}`;
+}
+
 function mostrarInformacionSeleccion($mensaje) {
   const $base = document.querySelector('#base').value;
   const $fecha = document.querySelector('#fecha').value;
-  console.log($fecha);
 
   if ($fecha) {
     $mensaje.textContent = `Mostrando cambios para ${$base} en fecha ${$fecha}`;
@@ -80,8 +89,8 @@ function borrarCambiosAnteriores() {
 
 function agregarMonedasBase(monedas) {
   const $monedasBase = document.querySelector('#base');
-  const $monedaConvertirDe = document.querySelector('#convertir-de');
-  const $monedaConvertirA = document.querySelector('#convertir-a');
+  const $monedaConvertirDe = document.querySelector('#moneda-de');
+  const $monedaConvertirA = document.querySelector('#moneda-a');
 
   for (const [simbolo] of monedas) {
     const $base = document.createElement('option');
@@ -109,13 +118,31 @@ export function obtenerMonedaSeleccionada() {
 }
 
 export function obtenerFechaSeleccionada() {
-  const $fecha = document.querySelector('#fecha').value;
+  const fecha = document.querySelector('#fecha').value;
 
-  if ($fecha) {
-    return $fecha;
+  if (fecha) {
+    return fecha;
   } else {
     return undefined;
   }
+}
+
+export function obtenerCantidad() {
+  const cantidad = document.querySelector('#cantidad').value;
+
+  return cantidad;
+}
+
+export function obtenerMonedaDe() {
+  const monedaDe = document.querySelector('#moneda-de').value;
+
+  return monedaDe;
+}
+
+export function obtenerMonedaA() {
+  const monedaA = document.querySelector('#moneda-a').value;
+
+  return monedaA;
 }
 
 export function mostrarCartelCargando() {

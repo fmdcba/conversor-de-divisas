@@ -68,23 +68,20 @@
 
     <footer class="container p-3">
       <p>Convertí la cantidad que quieras de una moneda a otra...</p>
-      <form id="coversor" class="row g-3">
+      <section id="conversor" class="row g-3">
         <div class="col-md-3">
-          <label for="dia" class="form-label">Cantidad</label>
-          <input type="number" class="form-control" id="cantidad" />
+          <label for="cantidad" class="form-label">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" value="1" />
         </div>
         <div class="col-md-3">
           <label class="form-label"> De:</label>
-          <select id="convertir-de" class="form-select">
-            <option value="" selected>Selecciona...</option>
-
+          <select id="moneda-de" class="form-select">
             <!--Simbolos-->
           </select>
         </div>
         <div class="col-md-3">
           <label class="form-label"> A:</label>
-          <select id="convertir-a" class="form-select">
-            <option value="" selected>Selecciona...</option>
+          <select id="moneda-a" class="form-select">
             <!--Simbolos-->
           </select>
         </div>
@@ -93,8 +90,10 @@
             Convertir
           </button>
         </div>
-      </form>
-      <span id="resultado-conversion"></span>
+        <div class="col-md-4">
+          <span id="conversion"></span>
+        </div>
+      </section>
     </footer>
 
     <script src="src/index.js" type="module"></script>

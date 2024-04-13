@@ -5,9 +5,26 @@ import {
   obtenerMonedaSeleccionada,
   mostrarListadoCambios,
   configurarFechas,
+  obtenerCantidad,
+  obtenerMonedaDe,
+  obtenerMonedaA,
+  mostrarConversion,
 } from './ui.js';
 
-import { obtenerCambios, obtenerMonedas } from './exchange.js';
+import {
+  obtenerCambios,
+  obtenerMonedas,
+  obtenerConversion,
+} from './exchange.js';
+
+async function convertir() {
+  const conversion = await obtenerConversion(
+    obtenerCantidad(),
+    obtenerMonedaDe(),
+    obtenerMonedaA(),
+  );
+  mostrarConversion(conversion);
+}
 
 async function actualizar() {
   const cambios = await obtenerCambios(
@@ -19,7 +36,7 @@ async function actualizar() {
 
 async function inicializar() {
   mostrarCartelCargando();
-  mostrarListadoMonedas(await obtenerMonedas(), actualizar);
+  mostrarListadoMonedas(await obtenerMonedas(), actualizar, convertir);
   configurarFechas();
 }
 
