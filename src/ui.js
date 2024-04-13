@@ -26,10 +26,12 @@ export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
 }
 
 export function mostrarListadoCambios(cambios) {
-  borrarCambiosAnteriores();
+  borrarCambiosAnteriores(cambios);
   const base = document.querySelector('#base').value;
-  const $monedaActual = document.querySelector(`#${base} td:last-child`);
-  $monedaActual.textContent = '$ 1';
+  const $monedaActiva = document.querySelector(`#${base}`);
+  const $cambioActivo = $monedaActiva.lastChild;
+  $cambioActivo.textContent = '$ 1';
+  $monedaActiva.className = 'table-light';
 
   for (const [simbolo, cambio] of cambios) {
     const $moneda = document.querySelector(`#${simbolo} td:last-child`);
@@ -39,10 +41,18 @@ export function mostrarListadoCambios(cambios) {
   }
 }
 
-function borrarCambiosAnteriores() {
+function borrarCambiosAnteriores(cambios) {
   document.querySelectorAll('.cambios').forEach(($cambio) => {
     $cambio.textContent = '#';
   });
+
+  for (const [simbolo, cambio] of cambios) {
+    const $monedaResaltada = document.querySelector(`#${simbolo}`);
+
+    if ($monedaResaltada.classList.contains('table-light')) {
+      $monedaResaltada.classList.remove('table-light');
+    }
+  }
 }
 
 function agregarMonedasBase(monedas) {

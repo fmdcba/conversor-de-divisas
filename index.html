@@ -13,18 +13,27 @@
 
   <body>
     <header class="container">
+      <h1
+        class="text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase"
+      >
+        Conversor de Monedas <strong>$</strong>
+      </h1>
       <nav class="row">
-        <h1
-          class="col-md-4 text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase"
-        >
-          Conversor de Monedas <strong>$</strong>
-        </h1>
+        <section class="col-md-4 container form-group">
+          <p>
+            Buscá cambios historicos a partir del <em>4 Enero de 1999</em>...
+          </p>
+          <label for="example-date-input" class="col-2 col-form-label"
+            >Fecha</label
+          >
+          <div class="col-10">
+            <input class="form-control" type="date" id="fecha" />
+          </div>
+        </section>
         <section class="col-md-4 d-inline-flex p-2">
           <div class="text-center">
-            <div class="col-md-3 d-inline-flex p-2">
-              <label class="form-label"> Seleccionar moneda base:</label>
-            </div>
-            <div class="col-md-4 d-inline-flex p-2">
+            <p class="p-2">Moneda base:</p>
+            <div class="col-md-6 d-inline-flex p-2">
               <select id="base" class="form-select">
                 <!--Simbolos-->
               </select>
@@ -39,16 +48,10 @@
       </nav>
     </header>
 
-    <section class="container form-group">
-      <p>Buscá valores historicos desde el <em>4 Enero de 1999</em>...</p>
-      <label for="example-date-input" class="col-2 col-form-label">Fecha</label>
-      <div class="col-10">
-        <input class="form-control" type="date" id="fecha" />
+    <main class="container mt-3">
+      <div class="alert alert-secondary" role="alert">
+        <strong id="#mensaje"></strong>
       </div>
-    </section>
-
-    <main class="container mt-5">
-      <h2><strong>Lista de Monedas</strong></h2>
       <table class="table table-success table-responsive table-striped">
         <thead>
           <tr>
@@ -63,7 +66,7 @@
       </table>
     </main>
 
-    <footer class="container">
+    <footer class="container p-3">
       <p>Convertí la cantidad que quieras de una moneda a otra...</p>
       <form id="coversor" class="row g-3">
         <div class="col-md-3">
