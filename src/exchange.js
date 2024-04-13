@@ -12,16 +12,12 @@ export async function obtenerMonedas() {
 }
 
 export async function obtenerListadoCambios(fecha = 'latest', base = 'AUD') {
-  try {
-    const resultado = await fetch(`${BASE_URL}/${fecha}?from=${base}`);
-    const resultadoJSON = await resultado.json();
-    if (resultadoJSON.rates) {
-      return resultadoJSON.rates;
-    } else {
-      return resultadoJSON.message;
-    }
-  } catch (error) {
-    return console.log(error);
+  const resultado = await fetch(`${BASE_URL}/${fecha}?from=${base}`);
+  const resultadoJSON = await resultado.json();
+  if (resultadoJSON.rates) {
+    return resultadoJSON.rates;
+  } else {
+    return resultadoJSON.message;
   }
 }
 

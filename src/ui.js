@@ -26,7 +26,16 @@ export function mostrarListadoMonedas(monedas, callbackSeleccionMoneda) {
 }
 
 export function mostrarListadoCambios(cambios) {
-  borrarCambiosAnteriores(cambios);
+  const $mensajeCambios = document.querySelector('#mensaje');
+
+  if (typeof cambios === 'string') {
+    const mensajeError = cambios;
+    mostrarMensajeError($mensajeCambios, mensajeError);
+  } else {
+    mostrarInformacionSeleccion($mensajeCambios);
+  }
+
+  borrarCambiosAnteriores();
   const base = document.querySelector('#base').value;
   const $monedaActiva = document.querySelector(`#${base}`);
   const $cambioActivo = $monedaActiva.lastChild;
@@ -41,18 +50,32 @@ export function mostrarListadoCambios(cambios) {
   }
 }
 
-function borrarCambiosAnteriores(cambios) {
+function mostrarInformacionSeleccion($mensaje) {
+  const $base = document.querySelector('#base').value;
+  const $fecha = document.querySelector('#fecha').value;
+  console.log($fecha);
+
+  if ($fecha) {
+    $mensaje.textContent = `Mostrando cambios para ${$base} en fecha ${$fecha}`;
+  } else {
+    $mensaje.textContent = `Mostrando cambios mas recientes para ${$base}`;
+  }
+}
+
+function mostrarMensajeError($mensaje, error) {
+  $mensaje.textContent = error;
+}
+
+function borrarCambiosAnteriores() {
+  const $monedaResaltada = document.querySelector('.table-light');
+
+  if ($monedaResaltada !== null) {
+    $monedaResaltada.classList.remove('table-light');
+  }
+
   document.querySelectorAll('.cambios').forEach(($cambio) => {
     $cambio.textContent = '#';
   });
-
-  for (const [simbolo, cambio] of cambios) {
-    const $monedaResaltada = document.querySelector(`#${simbolo}`);
-
-    if ($monedaResaltada.classList.contains('table-light')) {
-      $monedaResaltada.classList.remove('table-light');
-    }
-  }
 }
 
 function agregarMonedasBase(monedas) {

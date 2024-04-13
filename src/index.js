@@ -10,11 +10,11 @@ import {
 import { obtenerCambios, obtenerMonedas } from './exchange.js';
 
 async function actualizar() {
-  const monedas = await obtenerCambios(
+  const cambios = await obtenerCambios(
     obtenerFechaSeleccionada(),
     obtenerMonedaSeleccionada(),
   );
-  mostrarListadoCambios(monedas);
+  mostrarListadoCambios(cambios);
 }
 
 async function inicializar() {
