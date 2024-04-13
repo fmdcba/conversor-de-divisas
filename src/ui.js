@@ -57,13 +57,21 @@ function borrarCambiosAnteriores(cambios) {
 
 function agregarMonedasBase(monedas) {
   const $monedasBase = document.querySelector('#base');
+  const $monedaConvertirDe = document.querySelector('#convertir-de');
+  const $monedaConvertirA = document.querySelector('#convertir-a');
 
   for (const [simbolo] of monedas) {
     const $base = document.createElement('option');
+    const $baseA = document.createElement('option');
+    const $baseDe = document.createElement('option');
     $base.setAttribute('for', simbolo);
     $base.textContent = simbolo;
+    $baseDe.textContent = simbolo;
+    $baseA.textContent = simbolo;
 
     $monedasBase.appendChild($base);
+    $monedaConvertirDe.appendChild($baseDe);
+    $monedaConvertirA.appendChild($baseA);
   }
 }
 
