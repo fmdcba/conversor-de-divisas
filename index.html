@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Conversor de Divisas</title>
+    <title>Conversor de Monedas</title>
     <link
       rel="stylesheet"
       href="node_modules/bootstrap/dist/css/bootstrap.min.css"
@@ -13,79 +13,75 @@
 
   <body>
     <header class="container">
+      <h1
+        class="text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase"
+      >
+        Conversor de Monedas <strong>$</strong>
+      </h1>
       <nav class="row">
-        <h1
-          class="col-md-4 text-center text-white h-25 p-2 m-1 bg-success bg-gradient text-uppercase"
-        >
-          Conversor de Divisas <strong>$</strong>
-        </h1>
+        <section class="col-md-4 container form-group">
+          <p>
+            Buscá cambios historicos a partir del <em>4 Enero de 1999</em>...
+          </p>
+          <label for="example-date-input" class="col-2 col-form-label"
+            >Fecha</label
+          >
+          <div class="col-10">
+            <input class="form-control" type="date" id="fecha" />
+          </div>
+        </section>
         <section class="col-md-4 d-inline-flex p-2">
-          <form id="base" class="text-center">
-            <div class="col-md-3 d-inline-flex p-2">
-              <label class="form-label"> Seleccionar Moneda Base:</label>
-            </div>
-            <div class="col-md-4 d-inline-flex p-2">
-              <select id="simbolo-base" class="form-select">
+          <div class="text-center">
+            <p class="p-2">Moneda base:</p>
+            <div class="col-md-6 d-inline-flex p-2">
+              <select id="base" class="form-select">
                 <!--Simbolos-->
               </select>
             </div>
             <div class="col-md-3 d-inline-flex p-2">
-              <button type="submit" id="listar" class="btn btn-success btn-sm">
-                Listar Valores
+              <button type="submit" id="mostrar" class="btn btn-success btn-sm">
+                Mostrar Cambios
               </button>
             </div>
-          </form>
+          </div>
         </section>
       </nav>
     </header>
 
-    <section class="container">
-      <p>Buscá valores historicos desde el <em>4 Enero de 1999</em>...</p>
-      <form id="fecha" class="row g-3">
-        <div class="col-md-3">
-          <label for="dia" class="form-label">Día</label>
-          <input type="number" class="form-control" id="dia" />
-        </div>
-        <div class="col-md-3">
-          <label for="mes" class="form-label">Mes</label>
-          <input type="number" class="form-control" id="mes" />
-        </div>
-        <div class="col-md-3">
-          <label for="anio" class="form-label">Año</label>
-          <input type="number" class="form-control" id="anio" />
-        </div>
-        <div class="col-md-3 d-inline-flex p-2">
-          <button
-            type="submit"
-            id="filtrar-fecha"
-            class="btn btn-success btn-sm"
-          >
-            Buscar
-          </button>
-        </div>
-      </form>
-      <span id="mensaje-fecha"></span>
-    </section>
+    <main class="container mt-3">
+      <div class="alert alert-success" role="alert">
+        <strong id="mensaje">Lista de monedas disponibles...</strong>
+      </div>
+      <table class="table table-success table-responsive table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Simbolo</th>
+            <th scope="col">Moneda</th>
+            <th scope="col">Cambio</th>
+          </tr>
+        </thead>
+        <tbody id="listado">
+          <!--Monedas-->
+        </tbody>
+      </table>
+    </main>
 
-    <section class="container">
+    <footer class="container p-3">
       <p>Convertí la cantidad que quieras de una moneda a otra...</p>
-      <form id="coversor" class="row g-3">
+      <section id="conversor" class="row g-3">
         <div class="col-md-3">
-          <label for="dia" class="form-label">Cantidad</label>
-          <input type="number" class="form-control" id="cantidad" />
+          <label for="cantidad" class="form-label">Cantidad</label>
+          <input type="number" class="form-control" id="cantidad" value="1" />
         </div>
         <div class="col-md-3">
           <label class="form-label"> De:</label>
-          <select id="convertir-de" class="form-select">
-            <option value="" selected>Selecciona...</option>
-
+          <select id="moneda-de" class="form-select">
             <!--Simbolos-->
           </select>
         </div>
         <div class="col-md-3">
           <label class="form-label"> A:</label>
-          <select id="convertir-a" class="form-select">
-            <option value="" selected>Selecciona...</option>
+          <select id="moneda-a" class="form-select">
             <!--Simbolos-->
           </select>
         </div>
@@ -94,25 +90,11 @@
             Convertir
           </button>
         </div>
-      </form>
-      <span id="resultado-conversion"></span>
-    </section>
-
-    <main class="container mt-5">
-      <h2><strong>Lista de Divisas</strong></h2>
-      <table class="table table-success table-responsive table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Simbolo</th>
-            <th scope="col">Moneda</th>
-            <th scope="col">Valor</th>
-          </tr>
-        </thead>
-        <tbody id="listado">
-          <!--Monedas-->
-        </tbody>
-      </table>
-    </main>
+        <div class="col-md-4">
+          <span id="conversion"></span>
+        </div>
+      </section>
+    </footer>
 
     <script src="src/index.js" type="module"></script>
   </body>
